@@ -9,7 +9,7 @@ var variable = 1;
 
 function setup() {
   let canvas = createCanvas(600, 600);
-  canvas.position(800, 50);
+  canvas.position(750, 50);
   //canvas.class("lemon");
 
   //FORMES
@@ -105,12 +105,28 @@ function setup() {
   sliderMarkovRepartitionTriangle3.style('width', '100px');
 
   //TAILLE DES FORMES
-   let textTaille = createDiv('Taille des Formes');
+  let textTaille = createDiv('Taille des Formes');
   textTaille.position(50, 400);
 
   sliderTaille = createSlider(0, 1, 0.5, 0);
   sliderTaille.position(50, 430);
   sliderTaille.style('width', '80px');
+
+  //BORDURE
+  let textBordure = createDiv('Bordure');
+  textBordure.position(50, 480);
+
+  sliderBordure = createSlider(0, 255, 0, 0);
+  sliderBordure.position(50, 500);
+  sliderBordure.style('width', '80px');
+
+  //BACKGROUND
+  let textBackground = createDiv('Background');
+  textBackground.position(50, 530);
+
+  sliderBackground = createSlider(0, 255, 255, 255);
+  sliderBackground.position(50, 560);
+  sliderBackground.style('width', '80px');
 
   //GRILLE
   let textGrille = createDiv('Taille de la Grille');
@@ -166,13 +182,17 @@ function draw() {
 
   var taille = sliderTaille.value();
 
+  var bordure = sliderBordure.value();
+
+  var test = sliderBackground.value();
+
   var val = sliderGrille.value();
   tailleGrille(val);
 
   var slidercouleur = sliderCouleur.value();
 
-  background(255);
-  //stroke(255);
+  background(test);
+  stroke(bordure);
 
   for ( var i = 0; i < width; i+=w) {
 		for (var j = 0; j < height ; j+=w){
