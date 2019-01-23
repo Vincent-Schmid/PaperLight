@@ -114,19 +114,19 @@ function setup() {
   sliderGrille.style('width', '80px');
 
   //COULEUR
-  let textCouleur = createDiv('Couleur');
+  let textCouleur = createDiv('Densité');
   textCouleur.position(50,650);
 
   sliderCouleur = createSlider(0, 100, 50, 0);
   sliderCouleur.position(50, 670);
   sliderCouleur.style('width', '80px');
 
-    for ( var i = 0; i < width; i+=w) {
+    /*for ( var i = 0; i < width; i+=w) {
 		for (var j = 0; j < height ; j+=w){
 			fill(255);
 			markovFormes(variable, i, j, w, 0);
 		}
-  }
+  }*/
 
   frameRate(0.7);
   
@@ -135,9 +135,33 @@ function setup() {
 
 function draw() {
 
-  var proba1 = sliderMarkovRepartitionCarre.value();
-  var proba2 = sliderMarkovRepartitionCarre2.value();
-  var proba3 = sliderMarkovRepartitionCarre3.value();
+  var probaCarre1 = sliderMarkovRepartitionCarre.value();
+  var probaCarre2 = sliderMarkovRepartitionCarre2.value();
+  var probaCarre3 = sliderMarkovRepartitionCarre3.value();
+
+  var proba1 = probaCarre1/(probaCarre1 + probaCarre2 + probaCarre3);
+  var proba2 = probaCarre2/(probaCarre1 + probaCarre2 + probaCarre3);
+  var proba3 = probaCarre3/(probaCarre1 + probaCarre2 + probaCarre3);
+
+
+  var probaRond1 = sliderMarkovRepartitionRond.value();
+  var probaRond2 = sliderMarkovRepartitionRond2.value();
+  var probaRond3 = sliderMarkovRepartitionRond3.value();
+
+  var proba4 = probaRond1/(probaRond1 + probaRond2 + probaRond3);
+  var proba5 = probaRond2/(probaRond1 + probaRond2 + probaRond3);
+  var proba6 = probaRond3/(probaRond1 + probaRond2 + probaRond3);
+
+
+  var probaTriangle1 = sliderMarkovRepartitionTriangle.value();
+  var probaTriangle2 = sliderMarkovRepartitionTriangle2.value();
+  var probaTriangle3 = sliderMarkovRepartitionTriangle3.value();
+
+  var proba7 = probaTriangle1/(probaTriangle1 + probaTriangle2 + probaTriangle3);
+  var proba8 = probaTriangle2/(probaTriangle1 + probaTriangle2 + probaTriangle3);
+  var proba9 = probaTriangle3/(probaTriangle1 + probaTriangle2 + probaTriangle3);
+
+  var total = [proba1, proba2, proba3, proba4, proba5, proba6, proba7, proba8, proba9];
 
   var val = sliderGrille.value();
   tailleGrille(val);
@@ -152,7 +176,7 @@ function draw() {
 			//line(i, 0, i, height);
 			//line(0, j, width, j);
 			fill(couleur(slidercouleur));
-			markovFormes(variable, i, j, w, 0);
+			markovFormes(variable, i, j, w, 0, total);
 		}
   }
 }
@@ -196,12 +220,12 @@ function markovTaille(x){
 	}
 }
 
-function markovFormes(k, posi, posj, x, probaTaille){
+function markovFormes(k, posi, posj, x, probaTaille, tabProba){
 
 	p = random();
 
 	if(k == 1){
-		if(p < 0.3){
+		if(p < tabProba[0]){
 			variable = 1;
 			a = markovTaille(probaTaille);
 			if(a == w/2){
@@ -211,19 +235,19 @@ function markovFormes(k, posi, posj, x, probaTaille){
 			return rect(posi, posj, a, a);
 		}
 
-		if(0.3 <= p && p < 0.5){
+		if(tabProba[0] <= p && p < 1 - tabProba[2]){
 			variable = 2;
 			a = markovTaille(probaTaille);			
 			return ellipse(posi+taille(x)/2, posj+taille(x)/2, a, a);
 		}
 
-		if(0.5 <= p){
+		if(1 - tabProba[2] <= p){
 			variable = 3;
 			return polygon(posi+w/3, posj+taille(x)/2, markovTaille(probaTaille)*0.60, 3);
 		}
 	}
 	if(k == 2){
-		if(p < 0.2){
+		if(p < tabProba[3]){
 			variable = 1;
 			a = markovTaille(probaTaille);
 			if(a == w/2){
@@ -233,19 +257,19 @@ function markovFormes(k, posi, posj, x, probaTaille){
 			return rect(posi, posj, a, a);
 		}
 
-		if(0.2 <= p && p < 0.6){
+		if(tabProba[3] <= p && p < 1 - tabProba[5]){
 			variable = 2;
 			a = markovTaille(probaTaille);			
 			return ellipse(posi+taille(x)/2, posj+taille(x)/2, a, a);
 		}
 
-		if(0.6 <= p){
+		if( 1 - tabProba[5] <= p){
 			variable = 3;
 			return polygon(posi+w/3, posj+taille(x)/2, markovTaille(probaTaille)*0.60, 3);
 		}
 	}
 	if(k == 3){
-		if(p < 0.1){
+		if(p < tabProba[6]){
 			variable = 1;
 			a = markovTaille(probaTaille);
 			if(a == w/2){
@@ -255,13 +279,13 @@ function markovFormes(k, posi, posj, x, probaTaille){
 			return rect(posi, posj, a, a);
 		}
 
-		if(0.1 <= p && p < 0.7){
+		if(tabProba[6] <= p && p < 1 - tabProba[8]){
 			variable = 2;
 			a = markovTaille(probaTaille);			
 			return ellipse(posi+taille(x)/2, posj+taille(x)/2, a, a);
 		}
 
-		if(0.7 <= p){
+		if(1 - tabProba[8] <= p){
 			variable = 3;
 			return polygon(posi+w/3, posj+taille(x)/2, markovTaille(probaTaille)*0.60, 3);
 		}
