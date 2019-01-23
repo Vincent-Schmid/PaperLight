@@ -10,7 +10,7 @@ var variable = 1;
 function setup() {
   let canvas = createCanvas(600, 600);
   canvas.position(800, 50);
-  canvas.class("lemon");
+  //canvas.class("lemon");
 
   //FORMES
   checkboxCarre = createCheckbox('CARRE', false);
@@ -103,11 +103,18 @@ function setup() {
   sliderMarkovRepartitionTriangle3 = createSlider(00, 100, 30, 10);
   sliderMarkovRepartitionTriangle3.position(500, 350);
   sliderMarkovRepartitionTriangle3.style('width', '100px');
-  
+
+  //TAILLE DES FORMES
+   let textTaille = createDiv('Taille des Formes');
+  textTaille.position(50, 400);
+
+  sliderTaille = createSlider(0, 1, 0.5, 0);
+  sliderTaille.position(50, 430);
+  sliderTaille.style('width', '80px');
 
   //GRILLE
   let textGrille = createDiv('Taille de la Grille');
-  textGrille.position(50,600);
+  textGrille.position(50, 600);
 
   sliderGrille = createSlider(20, 120, 60, 20);
   sliderGrille.position(50, 620);
@@ -115,18 +122,12 @@ function setup() {
 
   //COULEUR
   let textCouleur = createDiv('Densité');
-  textCouleur.position(50,650);
+  textCouleur.position(50, 650);
 
   sliderCouleur = createSlider(0, 100, 50, 0);
   sliderCouleur.position(50, 670);
   sliderCouleur.style('width', '80px');
 
-    /*for ( var i = 0; i < width; i+=w) {
-		for (var j = 0; j < height ; j+=w){
-			fill(255);
-			markovFormes(variable, i, j, w, 0);
-		}
-  }*/
 
   frameRate(0.7);
   
@@ -163,20 +164,22 @@ function draw() {
 
   var total = [proba1, proba2, proba3, proba4, proba5, proba6, proba7, proba8, proba9];
 
+  var taille = sliderTaille.value();
+
   var val = sliderGrille.value();
   tailleGrille(val);
 
   var slidercouleur = sliderCouleur.value();
 
   background(255);
-  stroke(255);
+  //stroke(255);
 
   for ( var i = 0; i < width; i+=w) {
 		for (var j = 0; j < height ; j+=w){
 			//line(i, 0, i, height);
 			//line(0, j, width, j);
 			fill(couleur(slidercouleur));
-			markovFormes(variable, i, j, w, 0, total);
+			markovFormes(variable, i, j, w, taille, total);
 		}
   }
 }
