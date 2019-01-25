@@ -7,10 +7,10 @@ var columns;
 var rows;
 var variable = 1;
 
+
 function setup() {
   let canvas = createCanvas(600, 600);
   canvas.position(750, 50);
-  //canvas.class("lemon");
 
   //FORMES
   checkboxCarre = createCheckbox('Carré', false);

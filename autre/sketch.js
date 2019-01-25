@@ -7,14 +7,6 @@ var columns;
 var rows;
 var variable = 1;
 
-var densite;
-//var y1 = 0;
-//var y2 = 1;
-
-  /*var x1 = 0;
-  var y1 = 0;
-  var x2 = w;
-  var y2;*/
 
 function setup() {
   let canvas = createCanvas(600, 600);
@@ -28,10 +20,6 @@ function setup() {
   let textMarkovRepartition = createDiv('REPARTITION MARKOVIENNE DES RAYURES :');
   textMarkovRepartition.position(20,170);
 
-    //HORIZONTALES
-  let textMarkovHorizontales = createDiv('Horizontales : ');
-  textMarkovHorizontales.position(20,230);
-
   let textProbaHorizontales = createDiv('Horizontales');
   textProbaHorizontales.position(135,205);
 
@@ -43,6 +31,10 @@ function setup() {
 
   let textProbaObliquesD = createDiv('Obliques Droites');
   textProbaObliquesD.position(570, 205);
+
+    //HORIZONTALES
+  let textMarkovHorizontales = createDiv('Horizontales : ');
+  textMarkovHorizontales.position(20,230);
 
   sliderMarkovRepartitionHorizontales = createSlider(0, 100, 50, 10);
   sliderMarkovRepartitionHorizontales.position(120, 230);
@@ -125,10 +117,38 @@ function setup() {
   sliderMarkovRepartitionObliquesDroites4 = createSlider(00, 100, 50, 10);
   sliderMarkovRepartitionObliquesDroites4.position(570, 380);
   sliderMarkovRepartitionObliquesDroites4.style('width', '100px');
-  
-  frameRate(0.7);
 
+  //GRILLE
+  let textGrille = createDiv('TAILLE DE LA GRILLE : ');
+  textGrille.position(20, 450);
+
+  sliderGrille = createSlider(20, 120, 40, 20);
+  sliderGrille.position(180, 450);
+  sliderGrille.style('width', '100px');
   
+  //BACKGROUND
+  let textBackground = createDiv('BACKGROUND :');
+  textBackground.position(20, 500);
+
+  sliderBackground = createSlider(0, 255, 0, 255);
+  sliderBackground.position(135, 500);
+  sliderBackground.style('width', '100px');
+
+  //DENSITE
+  let textCouleur = createDiv('DENSITE :');
+  textCouleur.position(20, 550);
+
+  sliderCouleur = createSlider(0, 100, 100, 0);
+  sliderCouleur.position(100, 550);
+  sliderCouleur.style('width', '100px');
+
+  //VITESSE
+  let textVitesse = createDiv('VITESSE :');
+  textVitesse.position(20, 600);
+
+  sliderVitesse = createSlider(0.1, 3, 1, 0);
+  sliderVitesse.position(100, 600);
+  sliderVitesse.style('width', '100px');  
 }
 
 
@@ -161,7 +181,7 @@ function draw() {
   var probaObliquesG3 = sliderMarkovRepartitionObliquesGauches3.value();
   var probaObliquesG4 = sliderMarkovRepartitionObliquesGauches4.value();
 
-  var proba9 = probaObliquesG1/(probaObliquesG1 + probaObliquesG2 + probaObliquesG3 + probaObliquesG4);
+  var proba9 =  probaObliquesG1/(probaObliquesG1 + probaObliquesG2 + probaObliquesG3 + probaObliquesG4);
   var proba10 = probaObliquesG2/(probaObliquesG1 + probaObliquesG2 + probaObliquesG3 + probaObliquesG4);
   var proba11 = probaObliquesG3/(probaObliquesG1 + probaObliquesG2 + probaObliquesG3 + probaObliquesG4);
   var proba12 = probaObliquesG4/(probaObliquesG1 + probaObliquesG2 + probaObliquesG3 + probaObliquesG4);
@@ -178,9 +198,17 @@ function draw() {
 
   var total = [proba1, proba2, proba3, proba4, proba5, proba6, proba7, proba8, proba9, proba10, proba11, proba12, proba13, proba14, proba15, proba16];
 
-  background(0);
+  var val = sliderGrille.value();
+  tailleGrille(val);
 
-  stroke(255);
+  var test = sliderBackground.value();
+  background(test);
+
+  var slidercouleur = sliderCouleur.value();
+
+  var vitesse = sliderVitesse.value();
+
+  frameRate(vitesse);
 
   for ( var i = 0; i < width; i+=w) {
     for (var j = 0; j < height ; j+=w){
@@ -191,15 +219,10 @@ function draw() {
       //lignesObliquesDroites(w, 160, 80, 10);
       //lignesVerticales(w, 160, 160, 10);
       //lignesHorizontales(w, 80, 160, 10);
+      stroke(couleur(slidercouleur));
       markovLignes(variable, i, j, w, 20, total);
     }
   }
-
-  densite = 3;
-
-  //lignesObliquesGauches(40, 200, 100, 10);
-  //lignesObliquesDroites(40, 200, 200, 3);
-
 }
 
 function lignesObliquesDroites(taille, posi, posj, densite){
@@ -304,12 +327,12 @@ function markovLignes(k, posi, posj, x, densite, tabProba){
       return lignesHorizontales(x, posi, posj, densite);
     }
 
-    if(tabProba[0] <= p && p < tabProba[1] + tabProba[2]){
+    if(tabProba[0] <= p && p < tabProba[0] + tabProba[1]){
       variable = 2;   
       return lignesVerticales(x, posi, posj, densite);
     }
 
-    if(tabProba[1] + tabProba[2] <= p && p < 1 - tabProba[3]){
+    if(tabProba[0] + tabProba[1] <= p && p < tabProba[0] + tabProba[1] + tabProba[2]){
       variable = 3;
       return lignesObliquesGauches(x, posi, posj, densite);
     }
@@ -326,12 +349,12 @@ function markovLignes(k, posi, posj, x, densite, tabProba){
       return lignesHorizontales(x, posi, posj, densite);
     }
 
-    if(tabProba[4] <= p && p < tabProba[5] + tabProba[6]){
+    if(tabProba[4] <= p && p < tabProba[4] + tabProba[5]){
       variable = 2;   
       return lignesVerticales(x, posi, posj, densite);
     }
 
-    if(tabProba[5] + tabProba[6] <= p && p < 1 - tabProba[7]){
+    if(tabProba[4] + tabProba[5] <= p && p < tabProba[4] + tabProba[5] + tabProba[6]){
       variable = 3;
       return lignesObliquesGauches(x, posi, posj, densite);
     }
@@ -348,12 +371,12 @@ function markovLignes(k, posi, posj, x, densite, tabProba){
       return lignesHorizontales(x, posi, posj, densite);
     }
 
-    if(tabProba[8] <= p && p < tabProba[9] + tabProba[10]){
+    if(tabProba[8] <= p && p < tabProba[8] + tabProba[9]){
       variable = 2;   
       return lignesVerticales(x, posi, posj, densite);
     }
 
-    if(tabProba[9] + tabProba[10] <= p && p < 1 - tabProba[11]){
+    if(tabProba[8] + tabProba[9] <= p && p < tabProba[8] + tabProba[9] + tabProba[10]){
       variable = 3;
       return lignesObliquesGauches(x, posi, posj, densite);
     }
@@ -370,12 +393,12 @@ function markovLignes(k, posi, posj, x, densite, tabProba){
       return lignesHorizontales(x, posi, posj, densite);
     }
 
-    if(tabProba[12] <= p && p < tabProba[13] + tabProba[14]){
+    if(tabProba[12] <= p && p < tabProba[12] + tabProba[13]){
       variable = 2;   
       return lignesVerticales(x, posi, posj, densite);
     }
 
-    if(tabProba[13] + tabProba[14] <= p && p < 1 - tabProba[15]){
+    if(tabProba[12] + tabProba[13] <= p && p < tabProba[12] + tabProba[13] + tabProba[14]){
       variable = 3;
       return lignesObliquesGauches(x, posi, posj, densite);
     }
