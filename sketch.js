@@ -13,144 +13,135 @@ function setup() {
   //canvas.class("lemon");
 
   //FORMES
-  checkboxCarre = createCheckbox('CARRE', false);
-  checkboxCarre.position(19, 150);
+  checkboxCarre = createCheckbox('Carré', false);
+  checkboxCarre.position(20, 130);
   checkboxCarre.changed(carreCheckEvent);
 
-  checkboxRond = createCheckbox('ROND', false);
-  checkboxRond.position(120, 150);
+  checkboxRond = createCheckbox('Rond', false);
+  checkboxRond.position(120, 130);
   //checkboxRond.changed(myCheckedEvent);
 
-  checkboxTriangle = createCheckbox('TRIANGLE', false);
-  checkboxTriangle.position(210, 150);
+  checkboxTriangle = createCheckbox('Triangle', false);
+  checkboxTriangle.position(210, 130);
   //checkboxTriangle.changed(myCheckedEvent);
 
   //MARKOV REPARTITION
-  let textMarkovRepartition = createDiv('Répartition Markovienne des formes');
-  textMarkovRepartition.position(50,200);
+  let textMarkovRepartition = createDiv('REPARTITION MARKOVIENNE DES FORMES :');
+  textMarkovRepartition.position(20,170);
 
   	//CARRE
-  let textMarkovCarre = createDiv('CARRE');
-  textMarkovCarre.position(0,300);
+  let textMarkovCarre = createDiv('Carré : ');
+  textMarkovCarre.position(20,230);
 
-  let textProbaCarre1 = createDiv('Carre');
-  textProbaCarre1.position(70,230);
+  let textProbaCarre1 = createDiv('Carré');
+  textProbaCarre1.position(130,205);
 
   let textProbaRond1 = createDiv('Rond');
-  textProbaRond1.position(70,280);
+  textProbaRond1.position(290,205);
 
   let textProbaTriangle1 = createDiv('Triangle');
-  textProbaTriangle1.position(70,330);
+  textProbaTriangle1.position(430, 205);
 
-  sliderMarkovRepartitionCarre = createSlider(0, 100, 65, 10);
-  sliderMarkovRepartitionCarre.position(50, 250);
+  sliderMarkovRepartitionCarre = createSlider(0, 100, 50, 10);
+  sliderMarkovRepartitionCarre.position(90, 230);
   sliderMarkovRepartitionCarre.style('width', '100px');
 
-  sliderMarkovRepartitionCarre2 = createSlider(00, 100, 30, 10);
-  sliderMarkovRepartitionCarre2.position(50, 300);
+  sliderMarkovRepartitionCarre2 = createSlider(00, 100, 50, 10);
+  sliderMarkovRepartitionCarre2.position(250, 230);
   sliderMarkovRepartitionCarre2.style('width', '100px');
   
-  sliderMarkovRepartitionCarre3 = createSlider(00, 100, 30, 10);
-  sliderMarkovRepartitionCarre3.position(50, 350);
+  sliderMarkovRepartitionCarre3 = createSlider(00, 100, 50, 10);
+  sliderMarkovRepartitionCarre3.position(400, 230);
   sliderMarkovRepartitionCarre3.style('width', '100px');
 
   	//ROND
-  let textMarkovRond = createDiv('ROND');
-  textMarkovRond.position(200,300);
+  let textMarkovRond = createDiv('Rond : ');
+  textMarkovRond.position(20,280);
 
-  let textProbaCarre2 = createDiv('Carre');
-  textProbaCarre2.position(250,230);
-
-  let textProbaRond2 = createDiv('Rond');
-  textProbaRond2.position(250,280);
-
-  let textProbaTriangle2 = createDiv('Triangle');
-  textProbaTriangle2.position(250,330);
-
-  sliderMarkovRepartitionRond = createSlider(0, 100, 30, 10);
-  sliderMarkovRepartitionRond.position(250, 250);
+  sliderMarkovRepartitionRond = createSlider(0, 100, 50, 10);
+  sliderMarkovRepartitionRond.position(90, 280);
   sliderMarkovRepartitionRond.style('width', '100px');
 
-  sliderMarkovRepartitionRond2 = createSlider(00, 100, 30, 10);
-  sliderMarkovRepartitionRond2.position(250, 300);
+  sliderMarkovRepartitionRond2 = createSlider(00, 100, 50, 10);
+  sliderMarkovRepartitionRond2.position(250, 280);
   sliderMarkovRepartitionRond2.style('width', '100px');
 
-  sliderMarkovRepartitionRond3 = createSlider(00, 100, 30, 10);
-  sliderMarkovRepartitionRond3.position(250, 350);
+  sliderMarkovRepartitionRond3 = createSlider(00, 100, 50, 10);
+  sliderMarkovRepartitionRond3.position(400, 280);
   sliderMarkovRepartitionRond3.style('width', '100px');
 
   	//TRIANGLE
-  let textMarkovTriangle = createDiv('TRIANGLE');
-  textMarkovTriangle.position(400,300);
+  let textMarkovTriangle = createDiv('Triangle : ');
+  textMarkovTriangle.position(20,330);
 
-  let textProbaCarre3 = createDiv('Carre');
-  textProbaCarre3.position(500,230);
-
-  let textProbaRond3 = createDiv('Rond');
-  textProbaRond3.position(500,280);
-
-  let textProbaTriangle3 = createDiv('Triangle');
-  textProbaTriangle3.position(500,330);
-
-  sliderMarkovRepartitionTriangle = createSlider(0, 100, 30, 10);
-  sliderMarkovRepartitionTriangle.position(500, 250);
+  sliderMarkovRepartitionTriangle = createSlider(0, 100, 50, 10);
+  sliderMarkovRepartitionTriangle.position(90, 330);
   sliderMarkovRepartitionTriangle.style('width', '100px');
 
-  sliderMarkovRepartitionTriangle2 = createSlider(00, 100, 30, 10);
-  sliderMarkovRepartitionTriangle2.position(500, 300);
+  sliderMarkovRepartitionTriangle2 = createSlider(00, 100, 50, 10);
+  sliderMarkovRepartitionTriangle2.position(250, 330);
   sliderMarkovRepartitionTriangle2.style('width', '100px');
 
-  sliderMarkovRepartitionTriangle3 = createSlider(00, 100, 30, 10);
-  sliderMarkovRepartitionTriangle3.position(500, 350);
+  sliderMarkovRepartitionTriangle3 = createSlider(00, 100, 50, 10);
+  sliderMarkovRepartitionTriangle3.position(400, 330);
   sliderMarkovRepartitionTriangle3.style('width', '100px');
 
-  //TAILLE DES FORMES
-  let textTaille = createDiv('Taille des Formes');
-  textTaille.position(50, 400);
-
-  sliderTaille = createSlider(0, 1, 0.5, 0);
-  sliderTaille.position(50, 430);
-  sliderTaille.style('width', '80px');
-
-  //BORDURE
-  let textBordure = createDiv('Bordure');
-  textBordure.position(50, 480);
-
-  sliderBordure = createSlider(0, 255, 0, 0);
-  sliderBordure.position(50, 500);
-  sliderBordure.style('width', '80px');
-
-  //BACKGROUND
-  let textBackground = createDiv('Background');
-  textBackground.position(50, 530);
-
-  sliderBackground = createSlider(0, 255, 255, 255);
-  sliderBackground.position(50, 560);
-  sliderBackground.style('width', '80px');
-
   //GRILLE
-  let textGrille = createDiv('Taille de la Grille');
-  textGrille.position(50, 600);
+  let textGrille = createDiv('TAILLE DE LA GRILLE : ');
+  textGrille.position(20, 400);
 
   sliderGrille = createSlider(20, 120, 60, 20);
-  sliderGrille.position(50, 620);
-  sliderGrille.style('width', '80px');
+  sliderGrille.position(180, 400);
+  sliderGrille.style('width', '100px');
 
-  //COULEUR
-  let textCouleur = createDiv('Densité');
-  textCouleur.position(50, 650);
+  //TAILLE DES FORMES
+  let textTaille = createDiv('TAILLE DES FORMES : ');
+  textTaille.position(20, 450);
+
+  sliderTaille = createSlider(0, 1, 0.5, 0);
+  sliderTaille.position(180, 450);
+  sliderTaille.style('width', '100px');
+
+  //BACKGROUND
+  let textBackground = createDiv('BACKGROUND :');
+  textBackground.position(20, 500);
+
+  sliderBackground = createSlider(0, 255, 255, 255);
+  sliderBackground.position(135, 500);
+  sliderBackground.style('width', '100px');
+
+  //BORDURE
+  let textBordure = createDiv('BORDURE :');
+  textBordure.position(20, 550);
+
+  sliderBordure = createSlider(0, 255, 0, 0);
+  sliderBordure.position(100, 550);
+  sliderBordure.style('width', '100px');
+
+  //DENSITE
+  let textCouleur = createDiv('DENSITE :');
+  textCouleur.position(20, 600);
 
   sliderCouleur = createSlider(0, 100, 50, 0);
-  sliderCouleur.position(50, 670);
-  sliderCouleur.style('width', '80px');
+  sliderCouleur.position(100, 600);
+  sliderCouleur.style('width', '100px');
 
+  //VITESSE
+  let textVitesse = createDiv('VITESSE :');
+  textVitesse.position(20, 650);
 
-  frameRate(0.7);
+  sliderVitesse = createSlider(0.1, 3, 1.5, 0);
+  sliderVitesse.position(100, 650);
+  sliderVitesse.style('width', '100px');
   
 }
 
 
 function draw() {
+
+  var vitesse = sliderVitesse.value();
+
+  frameRate(vitesse);
 
   var probaCarre1 = sliderMarkovRepartitionCarre.value();
   var probaCarre2 = sliderMarkovRepartitionCarre2.value();
@@ -235,7 +226,7 @@ function tailleGrille(x){
 function markovTaille(x){
 	p = random();
 
-	if(p < x){
+	if(p > x){
 		return w/2;
 	}
 	else {
