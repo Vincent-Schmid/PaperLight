@@ -17,7 +17,7 @@ function setup() {
   rows = floor(height/w);
 
   //MARKOV REPARTITION
-  let textMarkovRepartition = createDiv('REPARTITION MARKOVIENNE DES RAYURES :');
+  /*let textMarkovRepartition = createDiv('REPARTITION MARKOVIENNE DES RAYURES :');
   textMarkovRepartition.position(20,170);
 
   let textProbaHorizontales = createDiv('Horizontales');
@@ -116,7 +116,7 @@ function setup() {
 
   sliderMarkovRepartitionObliquesDroites4 = createSlider(00, 100, 50, 10);
   sliderMarkovRepartitionObliquesDroites4.position(570, 380);
-  sliderMarkovRepartitionObliquesDroites4.style('width', '100px');
+  sliderMarkovRepartitionObliquesDroites4.style('width', '100px');*/
 
   //GRILLE
   let textGrille = createDiv('TAILLE DE LA GRILLE : ');
@@ -126,7 +126,7 @@ function setup() {
   sliderGrille.position(180, 450);
   sliderGrille.style('width', '100px');
   
-  //BACKGROUND
+  /*//BACKGROUND
   let textBackground = createDiv('BACKGROUND :');
   textBackground.position(20, 500);
 
@@ -148,13 +148,13 @@ function setup() {
 
   sliderVitesse = createSlider(0.1, 3, 1, 0);
   sliderVitesse.position(100, 600);
-  sliderVitesse.style('width', '100px');  
+  sliderVitesse.style('width', '100px');  */
 }
 
 
 function draw() {
 
-  var probaHorizontales1 = sliderMarkovRepartitionHorizontales.value();
+  /*var probaHorizontales1 = sliderMarkovRepartitionHorizontales.value();
   var probaHorizontales2 = sliderMarkovRepartitionHorizontales2.value();
   var probaHorizontales3 = sliderMarkovRepartitionHorizontales3.value();
   var probaHorizontales4 = sliderMarkovRepartitionHorizontales4.value();
@@ -196,19 +196,24 @@ function draw() {
   var proba15 = probaObliquesD3/(probaObliquesD1 + probaObliquesD2 + probaObliquesD3 + probaObliquesD4);
   var proba16 = probaObliquesD4/(probaObliquesD1 + probaObliquesD2 + probaObliquesD3 + probaObliquesD4);
 
-  var total = [proba1, proba2, proba3, proba4, proba5, proba6, proba7, proba8, proba9, proba10, proba11, proba12, proba13, proba14, proba15, proba16];
+  var total = [proba1, proba2, proba3, proba4, proba5, proba6, proba7, proba8, proba9, proba10, proba11, proba12, proba13, proba14, proba15, proba16];*/
 
   var val = sliderGrille.value();
   tailleGrille(val);
 
-  var test = sliderBackground.value();
+  /*var test = sliderBackground.value();
   background(test);
 
   var slidercouleur = sliderCouleur.value();
 
   var vitesse = sliderVitesse.value();
 
-  frameRate(vitesse);
+  frameRate(vitesse);*/
+
+  frameRate(0.7);
+
+  background(0);
+  stroke(255);
 
   for ( var i = 0; i < width; i+=w) {
     for (var j = 0; j < height ; j+=w){
@@ -219,8 +224,25 @@ function draw() {
       //lignesObliquesDroites(w, 160, 80, 10);
       //lignesVerticales(w, 160, 160, 10);
       //lignesHorizontales(w, 80, 160, 10);
-      stroke(couleur(slidercouleur));
-      markovLignes(variable, i, j, w, 10, total);
+      //stroke(couleur(slidercouleur));
+      //markovLignes(variable, i, j, w, 20, total);
+      lignebrisee(w, i, j);
+    }
+  }
+}
+
+function lignebrisee(taille, posi, posj){
+  p1 = random(0, taille);
+  p2 = random(0, taille);
+  x1 = posj + p1;
+  x2 = posj + p2;
+
+  for(var i = 0; i < width; i+=w){
+    for (var j = 0; j < height ; j+=w){
+     line(x1,posi, x2, posi + taille);
+     x1 = x2;
+     p2 = random(0, taille);
+     x2 = posj + p2;
     }
   }
 }
@@ -271,8 +293,8 @@ function lignesVerticales(taille, posi, posj, densite){
 }
 
 function lignesHorizontales(taille, posi, posj, densite){
-  for ( var i = posi; i <= posi+taille; i+=densite/2) {
-    for (var j = posj; j <= posj+taille ; j+=densite/2){
+  for ( var i = posi; i < posi+taille; i+=densite/2) {
+    for (var j = posj; j < posj+taille ; j+=densite/2){
       line(posi, j, posi + taille, j);
     }
   }
