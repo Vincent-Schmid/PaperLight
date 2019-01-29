@@ -188,7 +188,15 @@ function draw() {
   columns = floor(width/w);
   rows = floor(height/w);
 
-  //MODE DE REPARTITION 1
+  /* Mode 1 : Ligne par ligne en partant d'en haut à gauche
+     Mode 2 : Colone par colone en commençant par en haut à gauche
+     Mode 3 : Diagonales montantes en partant d'en haut à gauche
+     Mode 4 : Diagonales montantes en partant d'en haut à droite
+     Mode 5 : Angles autour du haut gauche
+     Mode 6 : Spirale en partant du milieu
+  */
+
+  //MODE DE REPARTITION 1 OK
   /*for (var j = 0; j < height ; j+=w){
     for (var i = 0; i < width; i+=w) {
       fill(couleur(slidercouleur));
@@ -197,7 +205,7 @@ function draw() {
   }*/
 
 
-  //MODE DE REPARTITION 2
+  //MODE DE REPARTITION 2 OK
   /*for (var i = 0; i < width; i+=w) {
     for (var j = 0; j < height ; j+=w){
       fill(couleur(slidercouleur));
@@ -206,44 +214,51 @@ function draw() {
   }*/
 
 
-  //MODE DE REPARTITION 3
+  //MODE DE REPARTITION 3 OK
   /*for (var compteur = 0; compteur < columns; compteur++){
-    for (var i = 0; i < compteur*val; i+=val) {
+    for (var i = 0; i <= compteur; i++) {
       fill(couleur(slidercouleur));
-      markovFormes(variable, i, compteur*val-i, w, taille, total);
+      markovFormes(variable, i*val, (compteur-i)*val, w, taille, total);
     }
   }
   for (var compteur = columns-1; compteur > 0; compteur--){
-    var i = (columns - compteur)*val;
-    j = height-val;
-    while (i < (columns-1)*val) {
+    var i = columns-compteur;
+    var j = height-val;
+    while (i < columns) {
       fill(couleur(slidercouleur));
-      markovFormes(variable, i, j, w, taille, total);
-      i+=val;
+      markovFormes(variable, i*val, j, w, taille, total);
+      console.log(i);
+      i+=1;
       j-=val;
     }
   }*/
+  
 
-  //MODE DE REPARTITION 4
-  for (var compteur = 0; compteur < columns; compteur++){
-    for (var i = (columns-compteur)*val; i > 0; i-=val) {
+  //MODE DE REPARTITION 4 OK
+  /*for (var compteur = 0; compteur < columns; compteur++){
+    var i = width-val;
+    var j = compteur*val;
+    while(j >= 0){
       fill(couleur(slidercouleur));
-      markovFormes(variable, i, i-compteur*val, w, taille, total);
+      markovFormes(variable, i, j, w, taille, total);
+      i-=val;
+      j-=val;
     }
   }
-  /*for (var compteur = columns-1; compteur > 0; compteur--){
-    var i = (columns - compteur)*val;
+
+  for (var compteur = columns-1; compteur > 0; compteur--){
+    var i = compteur*val-val;
     j = height-val;
-    while (i < (columns-1)*val) {
+    while (i >= 0) {
       fill(couleur(slidercouleur));
       markovFormes(variable, i, j, w, taille, total);
-      i+=val;
+      i-=val;
       j-=val;
     }
   }*/
 
 
-  //MODE DE REPARTITION 5
+  //MODE DE REPARTITION 5 OK 
   /*for (var compteur = 0; compteur <= columns; compteur++){
     for (var i = 0; i <= compteur*val; i+=val){
       fill(couleur(slidercouleur));
@@ -255,7 +270,7 @@ function draw() {
     }
   }*/
 
-  //MODE DE REPARTITION 6
+  //MODE DE REPARTITION 6 OK
   /*var a = columns/2*val;
   var b = rows/2*val-1;
   var side = 0;
