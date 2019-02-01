@@ -135,12 +135,12 @@ function setup() {
   sliderBackground.style('width', '100px');
 
   //DENSITE
-  let textCouleur = createDiv('DENSITE :');
-  textCouleur.position(20, 550);
+  let textDensite = createDiv('DENSITE :');
+  textDensite.position(20, 550);
 
-  sliderCouleur = createSlider(0, 100, 100, 0);
-  sliderCouleur.position(100, 550);
-  sliderCouleur.style('width', '100px');
+  sliderDensite = createSlider(10, 30, 20, 10);
+  sliderDensite.position(100, 550);
+  sliderDensite.style('width', '100px');
 
   //VITESSE
   let textVitesse = createDiv('VITESSE :');
@@ -204,7 +204,7 @@ function draw() {
   var test = sliderBackground.value();
   background(test);
 
-  var slidercouleur = sliderCouleur.value();
+  var sliderdensite = sliderDensite.value();
 
   var vitesse = sliderVitesse.value();
 
@@ -222,7 +222,7 @@ function draw() {
       //lignesObliquesDroites(w, 160, 80, 10);
       //lignesVerticales(w, 160, 160, 10);
       //lignesHorizontales(w, 80, 160, 10);
-      stroke(couleur(slidercouleur));
+      //stroke(couleur(slidercouleur));
       markovLignes(variable, i, j, w, 10, total);
     }
   }*/
@@ -230,55 +230,56 @@ function draw() {
   //MODE DE REPARTITION 1 OK
   /*for (var j = 0; j < height ; j+=w){
     for (var i = 0; i < width; i+=w) {
-      stroke(couleur(slidercouleur));
-      markovLignes(variable, i, j, w, 10, total);
+      //stroke(couleur(slidercouleur));
+      markovLignes(variable, i, j, w, sliderdensite, total);
     }
   }*/
 
   //MODE DE REPARTITION 2 OK
   /*for (var i = 0; i < width; i+=w) {
     for (var j = 0; j < height ; j+=w){
-      stroke(couleur(slidercouleur));
-      markovLignes(variable, i, j, w, 10, total);
+      //stroke(couleur(slidercouleur));
+      markovLignes(variable, i, j, w, sliderdensite, total);
     }
   }*/
 
+  stroke(255);
+
   //MODE DE REPARTITION 3 OK
-  /*for (var compteur = 0; compteur < columns; compteur++){
+  for (var compteur = 0; compteur < columns; compteur++){
     for (var i = 0; i <= compteur; i++) {
-      stroke(couleur(slidercouleur));
-      markovLignes(variable, i*val, (compteur-i)*val, w, 10, total);
+      //stroke(couleur(slidercouleur));
+      markovLignes(variable, i*val, (compteur-i)*val, w, sliderdensite, total);
     }
   }
   for (var compteur = columns-1; compteur > 0; compteur--){
     var i = columns-compteur;
     var j = height-val;
     while (i < columns) {
-      stroke(couleur(slidercouleur));
-      markovLignes(variable, i*val, j, w, 10, total);
+      //stroke(couleur(slidercouleur));
+      markovLignes(variable, i*val, j, w, sliderdensite, total);
       i+=1;
       j-=val;
     }
-  }*/
+  }
 
   //MODE DE REPARTITION 4 OK
   /*for (var compteur = 0; compteur < columns; compteur++){
     var i = width-val;
     var j = compteur*val;
     while(j >= 0){
-      stroke(couleur(slidercouleur));
-      markovLignes(variable, i, j, w, 10, total);
+      //stroke(couleur(slidercouleur));
+      markovLignes(variable, i, j, w, sliderdensite, total);
       i-=val;
       j-=val;
     }
   }
-
   for (var compteur = columns-1; compteur > 0; compteur--){
     var i = compteur*val-val;
     j = height-val;
     while (i >= 0) {
-      stroke(couleur(slidercouleur));
-      markovLignes(variable, i, j, w, 10, total);
+      //stroke(couleur(slidercouleur));
+      markovLignes(variable, i, j, w, sliderdensite, total);
       i-=val;
       j-=val;
     }
@@ -287,25 +288,25 @@ function draw() {
   //MODE DE REPARTITION 5 OK
   /*for (var compteur = 0; compteur <= columns; compteur++){
     for (var i = 0; i <= compteur*val; i+=val){
-      stroke(couleur(slidercouleur));
-      markovLignes(variable, i, compteur*val, w, 10, total);
+      //stroke(couleur(slidercouleur));
+      markovLignes(variable, i, compteur*val, w, sliderdensite, total);
     }
     for (var j = compteur*val-val; j >= 0; j-=val){
-      stroke(couleur(slidercouleur));
-      markovLignes(variable, compteur*val, j, w, 10, total);
+      //stroke(couleur(slidercouleur));
+      markovLignes(variable, compteur*val, j, w, sliderdensite, total);
     }
   }*/
 
 
  //MODE DE REPARTITION 6 OK
-  var a = columns/2*val;
+  /*var a = columns/2*val;
   var b = rows/2*val-1;
   var side = 0;
   var move = val;
   //fill(couleur(slidercouleur));
   //markovFormes(variable, a, b, w, taille, total);
-  stroke(couleur(slidercouleur));
-  markovLignes(variable, a, b, w, 10, total);
+  //stroke(couleur(slidercouleur));
+  markovLignes(variable, a, b, w, sliderdensite, total);
 
     
   while (side <= width/2) { 
@@ -314,18 +315,18 @@ function draw() {
       a += move;
       //fill(couleur(slidercouleur));
       //markovFormes(variable, a, b, w, taille, total);
-      stroke(couleur(slidercouleur));
-      markovLignes(variable, a, b, w, 10, total);
+      //stroke(couleur(slidercouleur));
+      markovLignes(variable, a, b, w, sliderdensite, total);
     }
     for (i = 0; i<side; i++) {
       b += move;
       //fill(couleur(slidercouleur));
       //markovFormes(variable, a, b, w, taille, total);
-      stroke(couleur(slidercouleur));
-      markovLignes(variable, a, b, w, 10, total);
+      //stroke(couleur(slidercouleur));
+      markovLignes(variable, a, b, w, sliderdensite, total);
     }
     side = side + 1;
-  }
+  }*/
 
 }
 

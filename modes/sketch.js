@@ -215,7 +215,7 @@ function draw() {
 
 
   //MODE DE REPARTITION 3 OK
-  /*for (var compteur = 0; compteur < columns; compteur++){
+  for (var compteur = 0; compteur < columns; compteur++){
     for (var i = 0; i <= compteur; i++) {
       fill(couleur(slidercouleur));
       markovFormes(variable, i*val, (compteur-i)*val, w, taille, total);
@@ -231,7 +231,7 @@ function draw() {
       i+=1;
       j-=val;
     }
-  }*/
+  }
   
 
   //MODE DE REPARTITION 4 OK

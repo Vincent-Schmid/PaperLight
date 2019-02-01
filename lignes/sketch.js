@@ -149,10 +149,13 @@ function setup() {
   sliderVitesse = createSlider(0.1, 3, 1, 0);
   sliderVitesse.position(100, 600);
   sliderVitesse.style('width', '100px');  */
+
 }
 
 
 function draw() {
+
+
 
   /*var probaHorizontales1 = sliderMarkovRepartitionHorizontales.value();
   var probaHorizontales2 = sliderMarkovRepartitionHorizontales2.value();
@@ -210,7 +213,7 @@ function draw() {
 
   frameRate(vitesse);*/
 
-  frameRate(0.7);
+  frameRate(0.2);
 
   background(0);
   stroke(255);
